@@ -1,0 +1,43 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	int i,j,a[10],k,c=0,min;
+	cout<<"Enter the elements of the array:";
+	for(i=0;i<10;i++)
+	cin>>a[i];
+	for(i=0;i<10;i++)
+	{
+		min=i;
+		for(j=i+1;j<10;j++)
+		{
+			if(a[j]<a[min])
+			min=j;
+		}
+		if(min!=i)
+	    {	k=a[min];
+		    a[min]=a[i];
+		    a[i]=k;
+     	}
+	}
+	cout<<"\nSORTED ARRAY:\n";
+	for(i=0;i<10;i++)
+	cout<<a[i]<<endl;
+	for(i=0;i<10-c;i++)
+	{
+			if(a[i]==a[i+1])
+			{
+				for(j=i+1;j<10-c;j++)
+				{
+					a[j]=a[j+1];
+				}
+				c++;
+				i--;
+			}
+	}
+	cout<<endl<<"NEW ARRAY:"<<endl;
+	for(i=0;i<10-c;i++)
+	{
+		cout<<a[i]<<endl;
+	}
+}
