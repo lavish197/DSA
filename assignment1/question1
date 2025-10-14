@@ -1,0 +1,167 @@
+#include <iostream>
+using namespace std;
+
+int n = 2, a[100], size = 0;
+void create();
+void display();
+void insertElement();
+void deleteElement();
+void linearSearch();
+void binarySearch();
+void bubbleSort();
+
+int main()
+{
+    while (n != 8)
+    {
+        cout << endl << "Select which operation to perform:" << endl;
+        cout << "1. CREATE" << endl;
+        cout << "2. DISPLAY" << endl;
+        cout << "3. INSERT" << endl;
+        cout << "4. DELETE" << endl;
+        cout << "5. LINEAR SEARCH" << endl;
+        cout << "6. BINARY SEARCH" << endl;
+        cout << "7. BUBBLE SORT" << endl;
+        cout << "8. EXIT" << endl;
+        cout << "Enter your choice: ";
+        cin >> n;
+
+        switch (n)
+        {
+        case 1: create(); break;
+        case 2: display(); break;
+        case 3: insertElement(); break;
+        case 4: deleteElement(); break;
+        case 5: linearSearch(); break;
+        case 6: binarySearch(); break;
+        case 7: bubbleSort(); break;
+        case 8: cout << endl << "Thank you!" << endl; break;
+        default: cout << "Invalid choice! Try again." << endl;
+        }
+    }
+
+    return 0;
+}
+
+void create()
+{
+    cout << "Enter number of elements: ";
+    cin >> size;
+    cout << "Enter elements of the array: ";
+    for (int i = 0; i < size; i++)
+        cin >> a[i];
+}
+
+void display()
+{
+    cout << "The array elements are: ";
+    for (int i = 0; i < size; i++)
+        cout << a[i] << " ";
+    cout << endl;
+}
+
+void insertElement()
+{
+    int x, pos;
+    cout << "Enter the element to insert: ";
+    cin >> x;
+    cout << "Enter the position (index) where you want to insert: ";
+    cin >> pos;
+
+    if (pos < 0 || pos > size)
+    {
+        cout << "Invalid position!" << endl;
+        return;
+    }
+
+    for (int i = size; i > pos; i--)
+        a[i] = a[i - 1];
+
+    a[pos] = x;
+    size++;
+
+    cout << "Element inserted successfully." << endl;
+}
+
+void deleteElement()
+{
+    int x, i, j;
+    cout << "Enter the element you want to delete: ";
+    cin >> x;
+
+    for (i = 0; i < size; i++)
+    {
+        if (a[i] == x)
+        {
+            for (j = i; j < size - 1; j++)
+                a[j] = a[j + 1];
+
+            size--;
+            cout << "Element deleted successfully." << endl;
+            return;
+        }
+    }
+
+    cout << "Element not found!" << endl;
+}
+
+void linearSearch()
+{
+    int x, i;
+    cout << "Enter the element to search: ";
+    cin >> x;
+
+    for (i = 0; i < size; i++)
+    {
+        if (a[i] == x)
+        {
+            cout << "Element found at index " << i << endl;
+            return;
+        }
+    }
+
+    cout << "Element not found!" << endl;
+}
+
+void binarySearch()
+{
+    int x, s = 0, e = size - 1, mid;
+    cout << "Enter the element to search: ";
+    cin >> x;
+
+    while (s <= e)
+    {
+        mid = (s + e) / 2;
+
+        if (a[mid] == x)
+        {
+            cout << "Element found at index " << mid << endl;
+            return;
+        }
+        else if (a[mid] > x)
+            e = mid - 1;
+        else
+            s = mid + 1;
+    }
+
+    cout << "Element not found!" << endl;
+}
+
+void bubbleSort()
+{
+    int temp;
+    for (int i = 0; i < size - 1; i++)
+    {
+        for (int j = 0; j < size - i - 1; j++)
+        {
+            if (a[j] > a[j + 1])
+            {
+                temp = a[j];
+                a[j] = a[j + 1];
+                a[j + 1] = temp;
+            }
+        }
+    }
+
+    cout << "Array sorted successfully." << endl;
+}
