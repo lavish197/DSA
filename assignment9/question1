@@ -1,0 +1,21 @@
+void BFS(int start, int n) {
+    for (int i = 0; i < n; i++)
+        visited[i] = 0;
+
+    enqueue(start);
+    visited[start] = 1;
+
+    printf("BFS Traversal: ");
+
+    while (front != -1 && front <= rear) {
+        int node = dequeue();
+        printf("%d ", node);
+
+        for (int j = 0; j < n; j++) {
+            if (adj[node][j] == 1 && visited[j] == 0) {
+                enqueue(j);
+                visited[j] = 1;
+            }
+        }
+    }
+}
